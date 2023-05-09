@@ -158,10 +158,17 @@ Create PROCEDURE UpdateAdminCredentials
     INNER JOIN LoginDetails as l ON u.LoginId=l.Id Inner Join Roles as r on r.RoleId = l.RoleId WHERE l.Id = 52;
 
  
-   -- Fetch complete data of Users using INNER JOIN
+   -- Wrong credentials
     Select l.Id As 'UserID', u.Email, l.Password, l.RoleId, l.IsActive from UserDetails AS u 
-    INNER JOIN LoginDetails as l ON u.LoginId=l.Id Inner Join Roles as r on r.RoleId = l.RoleId WHERE u.Email = 'ss@gmail.com' AND l.Password = 'vGGOWn4ww4sWpXAB/fQoiFx4Z83d6+LxMsGna0j9+sI=' AND L.DeletedFlag = 0 AND l.IsActive = 1;
+    INNER JOIN LoginDetails as l ON u.LoginId=l.Id Inner Join Roles as r on r.RoleId = l.RoleId WHERE u.Email = 'ss@gmail.com' AND l.Password = 'vGGOWn4ww4sWpXAB/fQoiFx4Z83d6+LxMsGna0j9+sI' AND L.DeletedFlag = 0;
 
+ -- Already exist
+    Select l.Id As 'UserID', u.Email, l.Password, l.RoleId, l.IsActive from UserDetails AS u 
+    INNER JOIN LoginDetails as l ON u.LoginId=l.Id  WHERE u.Email = 'ss@gmail.com' AND  L.DeletedFlag = 0;
+
+ -- Not have access right
+    Select l.Id As 'UserID', u.Email, l.Password, l.RoleId, l.IsActive from UserDetails AS u 
+    INNER JOIN LoginDetails as l ON u.LoginId=l.Id Inner Join Roles as r on r.RoleId = l.RoleId WHERE u.Email = 'ss@gmail.com' AND  L.DeletedFlag = 0 AND l.IsActive = 0;
 
 
     -- Fethc All Tables
