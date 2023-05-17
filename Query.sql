@@ -49,12 +49,12 @@ Drop TABLE UserDetails;
 -- Insert Data into UserDetails
     Insert Into UserDetails Values 
         -- ('Aashish','Verma','9876543210','Chandigarg',2),
-        (45,'Rahul','SIngh','rahul@gmail.com','9876543210','Gurgaon')
+        (null,'Rahul','SIngh','rahul1@gmail.com','9876543210','Gurgaon')
 
 -- Insert Data into Credentials
     Insert into LoginDetails (Password,RoleId,IsActive) values
     -- (7,'aashish','aashish@gmail.com',0),
-    ('Test@1234',2,1)
+    ('Test@1234',2,0)
 
 -- Insert Into Roles
     Insert Into Roles values
@@ -97,6 +97,12 @@ DELETE FROM LoginDetails WHERE Id = 44;
     Select u.FirstName, u.LastName, u.Phone, u.Address, u.Email, r.RoleName As 'RoleType', l.IsActive from UserDetails AS u 
     INNER JOIN LoginDetails as l ON u.LoginId=l.Id Inner Join Roles as r on r.RoleId = l.RoleId;
 
+
+Select u.FirstName, u.LastName, u.Phone, u.Address, u.Email, r.RoleName As 'RoleType', l.IsActive,l.RoleId, l.Password from UserDetails AS u 
+    LEFT JOIN LoginDetails as l ON u.LoginId=l.Id LEFT Join Roles as r on r.RoleId = l.RoleId;
+
+ Select l.Id, u.FirstName, u.LastName, u.Phone, u.Address, u.Email, r.RoleName As 'RoleType', l.IsActive, l.Password from UserDetails AS u 
+    RIGHT JOIN LoginDetails as l ON l.Id=u.LoginId RIGHT Join Roles as r on r.RoleId = l.RoleId;
 
 -- Query to fetch complete data of user using some filter
     Select u.Id, u.FirstName, u.LastName, u.Phone, u.Address, c.Email, r.RoleName As 'RoleType', c.IsActive from UserDetails AS u 

@@ -49,7 +49,7 @@ Drop TABLE UserDetails;
 -- Insert Data into UserDetails
     Insert Into UserDetails Values 
         -- ('Aashish','Verma','9876543210','Chandigarg',2),
-        (3,'Rahul','SIngh','rahul@gmail.com','9876543210','Gurgaon'),
+        (null,'Rahul','SIngh','rahul@gmail.com','9876543210','Gurgaon')
         (4,'Amit','Sain','amit@gmail.com','9876543210','Gurgaon'),
         (5,'Shivam','Sharma','rahul@gmail.com','9876543210','Gurgaon'),
         (6,'Ankur','Sharma','rahul@gmail.com','9876543210','Gurgaon')
@@ -95,8 +95,12 @@ UPDATE LoginDetails Set DeletedFlag = 0 WHERE Id = 7;
 
 DELETE FROM LoginDetails WHERE Id =42;
 -- Fetch complete data of Users using INNER JOIN
-    Select u.FirstName, u.LastName, u.Phone, u.Address, u.Email, r.RoleName As 'RoleType', l.IsActive from UserDetails AS u 
-    INNER JOIN LoginDetails as l ON u.UId=l.Id Inner Join Roles as r on r.RoleId = l.RoleId;
+    Select u.FirstName, u.LastName, u.Phone, u.Address, u.Email, r.RoleName As 'RoleType', l.IsActive, l.Password from UserDetails AS u 
+    LEFT JOIN LoginDetails as l ON u.LoginId=l.Id LEFT Join Roles as r on r.RoleId = l.RoleId;
+
+    -- Fetch complete data of Users using INNER JOIN
+    Select u.FirstName, u.LastName, u.Phone, u.Address, u.Email, r.RoleName As 'RoleType', l.IsActive, l.Password from UserDetails AS u 
+    RIGHT JOIN LoginDetails as l ON u.LoginId=l.Id RIGHT Join Roles as r on r.RoleId = l.RoleId;
 
 
 -- Query to fetch complete data of user using some filter
